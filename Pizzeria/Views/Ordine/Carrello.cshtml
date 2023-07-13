@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Pizzeria.Models.Ordine>
+
+@{
+    ViewBag.Title = "Carrello";
+}
+<div class="container d-flex flex-column">
+
+    <h2>il tuo Carrello </h2>
+    @if (ViewBag.carrelloVuoto != null)
+    {
+        <h1 class="text-center ">@ViewBag.carrelloVuoto</h1>
+    }
+    else
+    {
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pizza.Foto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pizza.NomePizza)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantita)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pizza.Prezzo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Note)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+
+                        <img src="~/Content/img/@Html.DisplayFor(modelItem => item.Pizza.Foto)" width="100" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pizza.NomePizza)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantita)
+                    </td>
+                    <td>
+                        @{
+                            var TotPrezzo = (item.Pizza.Prezzo * item.Quantita);
+                            ViewBag.PrezzoTot = TotPrezzo.ToString("c");
+                        }
+                        @ViewBag.PrezzoTot
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+
+                    </td>
+
+
+
+                    <td>
+                        @Html.ActionLink("Modifica", "Edit", new { id = item.IDordine }, new { @class = "btn  text-white", @style = "text-decoration:none;background-color: #970C0A;" }) ||
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#delete" style="text-decoration: none; background-color: #970C0A;">
+                            Cancella Ordine
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Cancellazione Ordine</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Vuoi cancellare l'ordine?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        @Html.ActionLink("Si", "Delete", new { id = item.IDordine })
+                                        @Html.ActionLink("No", "Carrello", "Ordine", null, new { id = item.IDordine })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="d-flex">
+
+        <p class="text-center fw-bold"> Totale Ordine &euro;</p>
+        <p class="text-center text-danger fw-bold" id="totPrezzo">  </p>
+        </div>
+        <hr />
+        <div class="container my-5">
+            @{
+                Html.RenderAction("PartialViewConfermaOrdine", "Ordine");
+            }
+        </div>
+
+    }
+    <div class="container">
+        @Html.ActionLink("Menù Pizze", "Index", "Pizza", null, new { @class = "btn  text-white", @style = "text-decoration:none;background-color: #970C0A;" })
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: 'totOrdine',
+            method: 'Get',
+            success: function (TotOrdine) {
+                $('#totPrezzo').text(TotOrdine);
+            }
+            })
+    });
+    
+</script>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Pizzeria.Models.Pizza>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2 class="text-center">Le nostre Pizze : </h2>
+
+@*<p>
+    @Html.ActionLink("aggiungi Pizza", "Create", "Pizza", null);
+</p>*@
+<div class="container gap-3">
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-image">
+                    <img src="~/Content/img/@item.Foto" />
+                </div>
+                <div class="card-text">
+                    <h2 class="card-title">@Html.DisplayFor(modelItem => item.NomePizza)</h2>
+                    <p class="card-body">@Html.DisplayFor(modelItem => item.Ingredienti)</p>
+                </div>
+                <div class="card-price">@Html.DisplayFor(modelItem => item.Prezzo)</div>
+                <p class="text-center">
+                    @Html.ActionLink("Dettagli Pizza", "Details", new { id = item.IDpizza }, new { @class = "btn  text-white", @style = "text-decoration:none;background-color: #970C0A;" })
+
+
+
+                </p>
+            </div>
+
+        </div>
+    </div>
+}
+</div>
+
+

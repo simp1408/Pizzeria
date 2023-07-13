@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Applicazione ASP.NET</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/Content/style.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</head>
+<body class="m-0 p-0">
+    <nav class="navbar navbar-expand-lg bg-danger">
+        <div class="container-fluid align-items-center">
+            <a class="navbar-brand text-white fs-1 fw-bold m-0" href="~/Home/Index">Pizzeria
+                <img src="~/Content/img/logo.png" alt="Alternate Text" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center text-white" id="navbarNav">
+                <ul class="navbar-nav mx-3">
+                    @if(User.Identity.IsAuthenticated)
+                    {
+
+                    <li class="nav-item mx-3">
+                        <a class="text-white" href="~/Pizza/ListaPizza">Gestione Ordine Pizze</a>
+                    </li>
+                     }
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item mx-3">
+                            <a class="text-white" href="~/Home/Logout" style="text-decoration:none;">Logout</a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="nav-item mx-3">
+                            <a class="text-white" href="~/Home/Login" style="text-decoration: none;">Login</a>
+                        </li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                        {
+
+                           <li class="nav-item mx-3">
+                               @Html.ActionLink("Carrello", "Carrello", "Ordine", null, new { @class = "text-white me-2", style = "text-decoration:none;" })
+                           </li>
+                        }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Applicazione ASP.NET</p>
+        </footer>
+    </div>
+
+</body>
+</html>

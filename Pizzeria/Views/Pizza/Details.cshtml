@@ -1,0 +1,38 @@
+﻿@model Pizzeria.Models.Pizza
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Dettagli Pizza</h2>
+
+<hr />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-md-6">
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="~/Content/img/@Model.Foto" />
+                </div>
+                <div class="card-text">
+                    <h2 class="card-title">@Model.NomePizza</h2>
+                    <p class="card-body">@Model.Ingredienti</p>
+                </div>
+                <div class="card-price">@Model.Prezzo</div>
+
+                <p class="text-center mt-4 g-2">
+                    @Html.ActionLink("<Menu Pizze", "Index", null, new { @class = "btn  text-white", @style = "text-decoration:none;  background-color: #970C0A;" })
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            @{
+                Html.RenderAction("PartialViewAggiungiAlCarrello", "Ordine");
+             }
+        </div>
+       
+
+    </div>
+</div>

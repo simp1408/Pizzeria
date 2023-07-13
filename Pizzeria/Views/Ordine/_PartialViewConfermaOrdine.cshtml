@@ -1,0 +1,39 @@
+﻿@model Pizzeria.Models.Ordine
+
+
+@using (Html.BeginForm("PartialViewConfermaOrdine", "Ordine", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal my-3">
+        <h4>Ordine</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IndirizzoSpedizione, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 mt-3">
+                @Html.EditorFor(model => model.IndirizzoSpedizione, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IndirizzoSpedizione, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-5">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Conferma ordine" class="btn btn-default text-white" style=" background-color: #970C0A;" />
+            </div>
+        </div>
+    </div>
+   
+}
+@if (ViewBag.MessaggioConferma != null)
+            {
+                <div class="text-danger">
+                    @ViewBag.MessaggioConferma
+                </div>
+            }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

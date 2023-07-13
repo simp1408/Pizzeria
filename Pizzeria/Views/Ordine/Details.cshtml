@@ -1,0 +1,82 @@
+﻿@model Pizzeria.Models.Ordine
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ordine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pizza.NomePizza)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pizza.NomePizza)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Utente.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Utente.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IndirizzoSpedizione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IndirizzoSpedizione)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrdineConsegnato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrdineConsegnato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrdineInConsegnato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrdineInConsegnato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataOrdine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataOrdine)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDordine }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

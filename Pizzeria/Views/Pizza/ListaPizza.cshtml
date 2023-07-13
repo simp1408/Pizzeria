@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Pizzeria.Models.Pizza>
+
+@{
+    ViewBag.Title = "ListaPizza";
+}
+<div class="d-flex flex-column">
+    
+<h2>ListaPizza</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomePizza)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Foto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prezzo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ingredienti)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomePizza)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Foto)*@
+            <img src="~/Content/img/@item.Foto" style="width:50px;height:50px"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prezzo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ingredienti)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDpizza }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDpizza }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDpizza })
+        </td>
+    </tr>
+}
+
+</table>
+<p>
+    @Html.ActionLink("Crea Pizza", "Create",null, new { @class = "btn  text-white", @style = "text-decoration:none;background-color: #970C0A;" })
+</p>
+</div>
